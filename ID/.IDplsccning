@@ -1,0 +1,20 @@
+# Authenticate Azure DevOps NuGet feed 
+- task: NuGetAuthenticate@1 
+  displayName: 'Authenticate Azure DevOps NuGet feed' 
+
+# Restore project 
+- task: DotNetCoreCLI@2 
+  inputs: 
+    command: 'custom' 
+    custom: 'restore' 
+
+# Build project 
+- task: DotNetCoreCLI@2 
+  inputs: 
+    command: 'custom' 
+    custom: 'build' 
+    arguments: '--no-restore' 
+
+# Run dependency scanning 
+- task: AdvancedSecurity-Dependency-Scanning@1 
+  displayName: 'Advanced Security Dependency Scanning'
